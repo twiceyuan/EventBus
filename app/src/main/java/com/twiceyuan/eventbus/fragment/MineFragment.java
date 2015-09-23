@@ -1,4 +1,4 @@
-package com.twiceyuan.eventbus;
+package com.twiceyuan.eventbus.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,14 +10,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
-import com.twiceyuan.eventbus.event.EventBus;
-import com.twiceyuan.eventbus.event.NewsReadEvent;
+import com.twiceyuan.eventbus.Counter;
+import com.twiceyuan.eventbus.R;
+import com.twiceyuan.eventbus.EventBus;
+import com.twiceyuan.eventbus.event.MineReadEvent;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class NewsFragment extends Fragment {
+public class MineFragment extends Fragment {
 
     @Bind(R.id.tv_display)
     TextView tv_display;
@@ -29,23 +31,23 @@ public class NewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_core, container, false);
         ButterKnife.bind(this, view);
-        tv_display.setText("新闻");
+        tv_display.setText("我的");
         updateUnread();
         return view;
     }
 
     private void updateUnread() {
-        btn_count.setText("未读数：" + Counter.getCounter().newsUnread);
+        btn_count.setText("未读数：" + Counter.getCounter().mineUnread);
     }
 
     @Subscribe
-    public void onEvent(NewsReadEvent event) {
+    public void onEvent(MineReadEvent event) {
         updateUnread();
     }
 
     @OnClick(R.id.btn_count)
     public void count() {
-        EventBus.getBus().post(new NewsReadEvent());
+        EventBus.getBus().post(new MineReadEvent());
     }
 
     @Override

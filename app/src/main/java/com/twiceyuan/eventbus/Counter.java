@@ -1,17 +1,10 @@
 package com.twiceyuan.eventbus;
 
-import android.os.SystemClock;
-
 import com.squareup.otto.Subscribe;
 import com.twiceyuan.eventbus.event.ChatReadEvent;
-import com.twiceyuan.eventbus.event.EventBus;
 import com.twiceyuan.eventbus.event.MineReadEvent;
 import com.twiceyuan.eventbus.event.NewsReadEvent;
 import com.twiceyuan.eventbus.event.ReadEvent;
-
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by twiceYuan on 9/22/15.
@@ -28,18 +21,19 @@ public class Counter {
 
     private Counter() {
         EventBus.getBus().register(this);
-        Observable.create(subscriber -> {
-            while (true) {
-                SystemClock.sleep((long) (20000 * Math.random()));
-                subscriber.onNext(new Object());
-            }
-        }).observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.newThread())
-                .subscribe(o -> {
-                    EventBus.getBus().post(new ChatReadEvent(ReadEvent.Type.ADD));
-                    EventBus.getBus().post(new NewsReadEvent(ReadEvent.Type.ADD));
-                    EventBus.getBus().post(new MineReadEvent(ReadEvent.Type.ADD));
-                });
+//        Observable.create(subscriber -> {
+//            // 每过一定时间让未读数都增加1
+//            while (true) {
+//                SystemClock.sleep((long) (20000 * Math.random()));
+//                subscriber.onNext(new Object());
+//            }
+//        }).observeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(Schedulers.newThread())
+//                .subscribe(o -> {
+//                    EventBus.getBus().post(new ChatReadEvent(ReadEvent.Type.ADD));
+//                    EventBus.getBus().post(new NewsReadEvent(ReadEvent.Type.ADD));
+//                    EventBus.getBus().post(new MineReadEvent(ReadEvent.Type.ADD));
+//                });
     }
 
     public static Counter getCounter() {

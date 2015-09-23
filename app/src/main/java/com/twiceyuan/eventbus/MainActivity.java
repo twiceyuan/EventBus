@@ -6,10 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.squareup.otto.Subscribe;
-import com.twiceyuan.eventbus.event.EventBus;
 import com.twiceyuan.eventbus.event.ChatReadEvent;
 import com.twiceyuan.eventbus.event.MineReadEvent;
 import com.twiceyuan.eventbus.event.NewsReadEvent;
+import com.twiceyuan.eventbus.fragment.ChatFragment;
+import com.twiceyuan.eventbus.fragment.MineFragment;
+import com.twiceyuan.eventbus.fragment.NewsFragment;
 
 import butterknife.ButterKnife;
 

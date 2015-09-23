@@ -1,4 +1,4 @@
-package com.twiceyuan.eventbus.event;
+package com.twiceyuan.eventbus;
 
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
